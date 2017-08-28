@@ -129,12 +129,10 @@ public class VideoController {
 		return "success";
 	}
 	@RequestMapping(value = "/deleteAll", method = RequestMethod.GET)
-	public String deleteAllVideo(int[] rowCheck) {
+	public String deleteAllVideo(Integer[] rowCheck) {
 		System.out.println(Arrays.toString(rowCheck));
-		List<Integer> list = new ArrayList<>();
-		for(int i=0;i<rowCheck.length;i++){
-			list.add(rowCheck[i]);
-		}
+		List<Integer> list = Arrays.asList(rowCheck);
+		
 		vs.deleteVideoByIds(list);
 		//vs.deleteVideoByIds(rowCheck);
 		return "forward:/video/videoManage.action";
