@@ -21,17 +21,36 @@
 		</style>
 		<script type="text/javascript">3.
 				var count=0;
-				$(function(){
-					$(".abc").click(function(){
-						var x = confirm("是否确定删除");
-						if(x==true){
-							alert("删除成功");
-						}else{
-							alert("取消删除");
-							return x;
-						}
-					});														
-				});						
+				function deleteInfo(id){
+					$.confirm({
+					    title: '警告',
+					    content: '您确定要删除吗!!!',
+					    buttons: {
+					        confirm:{
+					        	 text: '十分肯定',
+					        	 action:function () {
+									 $.ajax({
+										 dataType:"text",
+										 data:{"id":id},
+										 type:"post",
+										 url:"${pageContext.request.contextPath }/video/deleteVideo.action",
+										 success:function(msg){
+											 if(msg=="success"){
+												 location.reload();
+											 }
+										 }
+										 
+										 
+									 });
+					             }
+					        },
+					                     取消: function () {
+					        },
+					        
+					    }
+					});
+					
+				}					
 				$(function(){
 					$(".aa").click(function(){
 						var all = this.checked;
@@ -44,11 +63,7 @@
 								$(".badge").text(0);
 								count=0;
 							}
-							
-							
 						});
-						
-													
 					});
 					
 					$(".box").click(function(){
@@ -63,12 +78,9 @@
 							$(".aa").prop("checked",true);
 						}else{
 							$(".aa").prop("checked",false);
-						}
-						
-						
-						
-						
+						}	
 					});
+					
 					$(".deleteAll").click(function(){
 						if(count==0){
 							$.alert({
@@ -80,32 +92,20 @@
 							    title: '警告',
 							    content: '注意哦,是全部删除啊!!!',
 							    buttons: {
-							        confirm: function () {
-							            $.alert('Confirmed!');
+							        confirm:{
+							        	 text: '十分肯定',
+							        	 action:function () {
+											  $($("form")[1]).submit();
+							             }
 							        },
-							        cancel: function () {
-							            $.alert('Canceled!');
+							                                 取消: function () {
 							        },
-							        somethingElse: {
-							            text: 'Something else',
-							            btnClass: 'btn-blue',
-							            keys: ['enter', 'shift'],
-							            action: function(){
-							                $.alert('Something else?');
-							            }
-							        }
+							        
 							    }
 							});
-							/* var dele = confirm("你确定删除吗?");
-							if(dele==true){
-								alert("删除成功!");
-								$($("form")[1]).submit();
-							}else{
-								alert("取消删除");
-								return dele;
-							} */									
+															
 						}
-					})										
+					});										
 				});
 
 		
@@ -184,9 +184,12 @@
 			     	<td>${video.videoLength }</td>
 			     	<td>${video.videoPlayTimes }</td>
 			     	<td><a class="glyphicon glyphicon-edit" role="button" href="${pageContext.request.contextPath }/video/editVideo.action?id=${video.id}"></a></td>
-			     	<td><a class="glyphicon glyphicon-trash abc"  role="button" href="${pageContext.request.contextPath }/video/deleteVideo.action?id=${video.id}"></a></td>
+			     	<td><a class="glyphicon glyphicon-trash abc" onclick="deleteInfo(${video.id})" role="button"></a></td>
 			     </tr>
 			   </c:forEach>
+			   <c:if test="${empty page.rows }">
+			      <tr><td colspan="9" style="color: red;font-size: 20px;">当前没有数据</td></tr>
+			   </c:if>
 			</table>
 			</form>
 			</div>

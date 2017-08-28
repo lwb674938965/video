@@ -121,11 +121,12 @@ public class VideoController {
 	}
 	
 	//删除视频
-	@RequestMapping(value = "/deleteVideo", method = RequestMethod.GET)
+	@RequestMapping(value = "/deleteVideo", method = RequestMethod.POST)
+	@ResponseBody
 	public String deleteVideo(int id) {
-		
+		System.out.println(id);
 		vs.deleteVideo(id);
-		return "forward:/video/videoManage.action";
+		return "success";
 	}
 	@RequestMapping(value = "/deleteAll", method = RequestMethod.GET)
 	public String deleteAllVideo(int[] rowCheck) {
