@@ -29,17 +29,17 @@
 					        confirm:{
 					        	 text: '十分肯定',
 					        	 action:function () {
-									 $.ajax({
-										 dataType:"text",
-										 data:{"id":id},
-										 type:"post",
-										 url:"${pageContext.request.contextPath }/video/deleteVideo.action",
-										 success:function(msg){
-											 if(msg=="success"){
-												 location.reload();
-											 }
-										 }	 
-									 });
+							 $.ajax({
+								 dataType:"text",
+								 data:{"id":id},
+								 type:"post",
+								 url:"${pageContext.request.contextPath }/video/deleteVideo.action",
+								 success:function(msg){
+									 if(msg=="success"){
+										 location.reload();
+									 }
+								 }	 
+							 });
 					             }
 					        },
 					                     取消: function () {
