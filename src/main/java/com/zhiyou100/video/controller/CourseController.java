@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.zhiyou100.video.model.Course;
@@ -66,10 +67,12 @@ public class CourseController {
 			}	
 		//删除课程
 			
-			@RequestMapping(value = "/deleteCourse.action", method = RequestMethod.GET)
+			@RequestMapping(value = "/deleteCourse.action", method = RequestMethod.POST)
+			@ResponseBody
 			public String deleteCourse(int id){
+				System.out.println(id);
 				cs.deleteCourseById(id);	
-				return "redirect:/course/courseList.action";
+				return "success";
 			}
 		
 

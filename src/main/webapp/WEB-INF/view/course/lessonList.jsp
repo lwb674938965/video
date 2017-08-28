@@ -9,41 +9,48 @@
 		<meta charset="UTF-8">
 		<title>视频添加-视频管理</title>
 		<link href="${pageContext.request.contextPath }/css/bootstrap.min.css" rel="stylesheet">
+		<link href="${pageContext.request.contextPath }/css/jquery-confirm.css" rel="stylesheet">
 		<script src="${pageContext.request.contextPath }/js/jquery-1.12.4.min.js"></script>
 		<script src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
+		<script src="${pageContext.request.contextPath }/js/jquery-confirm.js"></script>
 		<style>
 			.container {
 				border: 0px solid black;
-				;
+				height: 800px;
 			}
 		</style>
 		
 		<script type="text/javascript">
-				/* function ordelete(x){
-					var x = confirm("是否确定删除");
-					if(x==true){
-						alert("删除成功");
-					}else{
-						alert("取消删除");
-						return x;
-					}
-		
-				} */
-				$(function(){
-					 $(".abc").click(function(){
-						//alert("1111");
-						var x = confirm("是否确定删除");
-						if(x==true){
-							alert("删除成功");
-						}else{
-							alert("取消删除");
-							return x;
-						}
-						
+				
+				function deleteCourse(id){
+					
+					$.confirm({
+					    title: '警告',
+					    content: '您确定要删除吗!!!',
+					    buttons: {
+					        confirm:{
+					        	 text: '十分肯定',
+					        	 action:function () {
+									 $.ajax({
+										 dataType:"text",
+										 data:{"id":id},
+										 type:"post",
+										 url:"${pageContext.request.contextPath }/course/deleteCourse.action",
+										 success:function(msg){
+											 if(msg=="success"){
+												 location.reload();
+											 }
+										 }	 
+									 });
+					             }
+					        },
+					                     取消: function () {
+					        },
+					        
+					    }
 					});
-					
-					
-				});
+						
+				}	
 				
 		
 		</script>
@@ -78,7 +85,7 @@
 								<a class="glyphicon glyphicon-edit" role="button" href="${pageContext.request.contextPath }/course/editCourse.action?id=${course.id}"></a>
 							</td>
 							<td>
-								<a class="glyphicon glyphicon-trash abc" id="${course.id}" role="button" href="${pageContext.request.contextPath }/course/deleteCourse.action?id=${course.id}"></a>
+								<a class="glyphicon glyphicon-trash abc" onclick="deleteCourse(${course.id})" role="button"></a>
 							</td>
 						</tr>
 						</c:forEach>

@@ -9,41 +9,46 @@
 		<meta charset="UTF-8">
 		<title>主讲人列表-主讲人管理</title>
 		<link href="${pageContext.request.contextPath }/css/bootstrap.min.css" rel="stylesheet">
+		<link href="${pageContext.request.contextPath }/css/jquery-confirm.css" rel="stylesheet">
 		<script src="${pageContext.request.contextPath }/js/jquery-1.12.4.min.js"></script>
 		<script src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
+		<script src="${pageContext.request.contextPath }/js/jquery-confirm.js"></script>
 		<style>
 			.container {
 				border: 0px solid black;
-				;
+				height: 800px;
+				
 			}
 		</style>
 		
 		<script type="text/javascript">
-				/* function ordelete(x){
-					var x = confirm("是否确定删除");
-					if(x==true){
-						alert("删除成功");
-					}else{
-						alert("取消删除");
-						return x;
-					}
-		
-				} */
-				
-				$(function(){
-					$(".abc").click(function(){
-						var x = confirm("是否确定删除");
-						if(x==true){
-							alert("删除成功");
-						}else{
-							alert("取消删除");
-							return x;
-						}
+				function deleteSpeaker(id){
+					$.confirm({
+					    title: '警告',
+					    content: '您确定要删除吗!!!',
+					    buttons: {
+					        confirm:{
+					        	 text: '十分肯定',
+					        	 action:function () {
+									 $.ajax({
+										 dataType:"text",
+										 data:{"id":id},
+										 type:"post",
+										 url:"${pageContext.request.contextPath }/speaker/deleteSpeaker.action",
+										 success:function(msg){
+											 if(msg=="success"){
+												 location.reload();
+											 }
+										 }	 
+									 });
+					             }
+					        },
+					                     取消: function () {
+					        },
+					        
+					    }
 					});
-					
-					
-					
-				});
+				}
 		
 		</script>
 	</head>
@@ -100,7 +105,7 @@
 							<a class="glyphicon glyphicon-edit" role="button" href="${pageContext.request.contextPath }/speaker/editSpeaker.action?id=${speaker.id}"></a>
 						</td>
 						<td>
-							<a class="glyphicon glyphicon-trash abc" id="${speaker.id}"  role="button" href="${pageContext.request.contextPath }/speaker/deleteSpeaker.action?id=${speaker.id}"></a>
+							<a class="glyphicon glyphicon-trash abc" onclick="deleteSpeaker(${speaker.id})" role="button"></a>
 						</td>
 					</tr>
 					</c:forEach>
