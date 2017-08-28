@@ -38,9 +38,7 @@
 											 if(msg=="success"){
 												 location.reload();
 											 }
-										 }
-										 
-										 
+										 }	 
 									 });
 					             }
 					        },
@@ -98,7 +96,7 @@
 											  $($("form")[1]).submit();
 							             }
 							        },
-							                                 取消: function () {
+							                    取消: function () {
 							        },
 							        
 							    }
@@ -160,19 +158,21 @@
             <div style="margin-top: 10px;">
             <form action="${pageContext.request.contextPath }/video/deleteAll.action">
 			<table class="table table-hover">
-			       
+			 <thead>
 			     <tr>
-			     	<th class="col-md-0"><input type="checkbox" class="aa"></th>
-			     	<th class="col-md-0">序号</th>
-			     	<th class="col-md-1">名称</th>
-			     	<th class="col-md-8">介绍</th>
-			     	<th class="col-md-0">讲师</th>
-			     	<th class="col-md-1">课程</th>
-			     	<th class="col-md-1">时长(秒)</th>
-			     	<th class="col-md-1">播放次数</th>
-			     	<th class="col-md-0">编辑</th>
-			     	<th class="col-md-0">删除</th>			     	
+			     	<th><input type="checkbox" class="aa"></th>
+			     	<th>序号</th>
+			     	<th>名称</th>
+			     	<th>介绍</th>
+			     	<th>讲师</th>
+			     	<th>课程</th>
+			     	<th>时长(秒)</th>
+			     	<th>播放次数</th>
+			     	<th>编辑</th>
+			     	<th>删除</th>			     	
 			     </tr>
+			     </thead>
+			     <c:if test="${not empty page.rows }">
 			     <c:forEach items="${page.rows }" var="video" varStatus="status">
 			     <tr>
 			     	<td><input type="checkbox"  value="${video.id }" name="rowCheck" class="box"></td>
@@ -187,8 +187,9 @@
 			     	<td><a class="glyphicon glyphicon-trash abc" onclick="deleteInfo(${video.id})" role="button"></a></td>
 			     </tr>
 			   </c:forEach>
+			      </c:if>
 			   <c:if test="${empty page.rows }">
-			      <tr><td colspan="9" style="color: red;font-size: 20px;">当前没有数据</td></tr>
+			      <tr><td  style="color: red;font-size: 20px;">当前没有数据</td></tr>
 			   </c:if>
 			</table>
 			</form>
