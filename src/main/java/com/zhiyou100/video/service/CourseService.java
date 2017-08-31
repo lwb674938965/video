@@ -19,4 +19,6 @@ public interface CourseService {
 	void deleteCourseById(int id);
 
 	List<Course> findAllCourse();
+
+	List<Course> findCoursesById(Integer subjectId);
 }

@@ -69,6 +69,7 @@ public class VideoServiceImpl implements VideoService {
 
 	@Override
 	public void editVideo(Video video) {
+		video.setUpdateTime(new Timestamp(System.currentTimeMillis()));
 		vm.updateByPrimaryKeySelective(video);
 		
 	}
@@ -115,17 +116,12 @@ public class VideoServiceImpl implements VideoService {
 		
 	}
 
-	/*@Override
-	public int[] getAvgVideo() {
-		int a1 = vm.findAverQianDuan();
-		int a2 = vm.findAverReact();
-		int a3 = vm.findAverUI();
-		int a4 = vm.findAverPython();
-		int a5 = vm.findAverJava();		
-		int [] arr= {a1,a2,a3,a4,a5};
-		//System.out.println(Arrays.toString(arr));
-		return arr;
-	}*/
+	@Override
+	public List<Video> findVideosByCourseId(Integer id) {
+		//System.out.println(vm.findVideosByCourseId(id));
+		return vm.findVideosByCourseId(id);
+	}
+
 
 
 

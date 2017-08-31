@@ -58,5 +58,7 @@ public interface VideoMapper {
 
 	List<VideoTimes> getAverageVideoNames(VideoTimes vt);
 
+	List<Video> findVideosByCourseId(@Param("id")Integer id);
+
 
 }

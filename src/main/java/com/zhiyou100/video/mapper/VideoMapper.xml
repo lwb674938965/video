@@ -373,7 +373,11 @@
 	
 	</select>
      
-
+  
+    <select id="findVideosByCourseId" resultMap="BaseResultMap">
+           SELECT v.*,speaker_name sName FROM video v LEFT JOIN speaker s  on speaker_id=s.id where course_id=#{id}
+    
+    </select>
  
  
  

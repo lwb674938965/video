@@ -19,4 +19,10 @@ public class SubjectServiceImpl implements SubjectService{
 		return sj.selectByExample(null);
 	}
 
+	@Override
+	public Subject findSubjectById(Integer subjectId) {
+
+		return sj.selectByPrimaryKey(subjectId);
+	}
+
 }

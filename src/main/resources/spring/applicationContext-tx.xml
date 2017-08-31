@@ -29,7 +29,7 @@
   </tx:advice>
    
    <aop:config>
-         <aop:pointcut expression="execution(* com.zhiyou100.video.service.*Serviceimpl.*(..))" id="pc"/>
+         <aop:pointcut expression="execution(* com.zhiyou100.video.service..*Serviceimpl.*(..))" id="pc"/>
          <aop:advisor advice-ref="txAdv" pointcut-ref="pc"/>
    </aop:config>
   

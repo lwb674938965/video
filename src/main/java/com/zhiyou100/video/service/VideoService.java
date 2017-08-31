@@ -32,6 +32,8 @@ public interface VideoService {
 
 	void addAdmin(Admin ad);
 
+	List<Video> findVideosByCourseId(Integer id);
+
 
 	
 	

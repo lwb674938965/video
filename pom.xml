@@ -251,6 +251,11 @@
 				<groupId>commons-fileupload</groupId>
 				<artifactId>commons-fileupload</artifactId>
 			</dependency>
+			<dependency>
+				 <groupId>javax.mail</groupId>
+				 <artifactId>mail</artifactId>
+				 <version>1.4.7</version> 
+			 </dependency>
 	</dependencies>
 		<build>
 		<!--打包src下的xml文件-->

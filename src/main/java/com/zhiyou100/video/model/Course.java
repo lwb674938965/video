@@ -1,6 +1,7 @@
 package com.zhiyou100.video.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Course {
     private Integer id;
@@ -19,12 +20,22 @@ public class Course {
     
     private Video vi;
     
+    private List<Video> videoList;
+    
     
     
     
     
 
-    public Video getVi() {
+    public List<Video> getVideoList() {
+		return videoList;
+	}
+
+	public void setVideoList(List<Video> videoList) {
+		this.videoList = videoList;
+	}
+
+	public Video getVi() {
 		return vi;
 	}
 
@@ -92,7 +103,7 @@ public class Course {
 	public String toString() {
 		return "Course [id=" + id + ", courseName=" + courseName + ", courseDescr=" + courseDescr + ", insertTime="
 				+ insertTime + ", updateTime=" + updateTime + ", subjectId=" + subjectId + ", subName=" + subName
-				+ ", vi=" + vi + "]";
+				+ ", vi=" + vi + ", videoList=" + videoList + "]";
 	}
     
     

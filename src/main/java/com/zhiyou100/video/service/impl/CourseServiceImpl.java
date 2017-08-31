@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.zhiyou100.video.mapper.CourseMapper;
 import com.zhiyou100.video.model.Course;
+import com.zhiyou100.video.model.CourseExample;
 import com.zhiyou100.video.model.Packing;
 import com.zhiyou100.video.model.Page;
 import com.zhiyou100.video.service.CourseService;
@@ -65,5 +66,12 @@ public class CourseServiceImpl implements CourseService {
 	public List<Course> findAllCourse() {
 		
 		return cm.selectByExample(null);
+	}
+
+	@Override
+	public List<Course> findCoursesById(Integer subjectId) {
+		CourseExample ce = new CourseExample();
+		ce.createCriteria().andSubjectIdEqualTo(subjectId);
+		return cm.selectByExample(ce);
 	}
 }

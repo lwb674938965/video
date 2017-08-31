@@ -11,12 +11,72 @@ public class CustomInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		if(request.getSession().getAttribute("adminName")!=null){
-			return true;
+		if(request.getSession().getAttribute("_front_user") != null){
+			if(request.getSession().getAttribute("adminName") != null){
+				return true;
+			}else{
+				if(request.getServletPath().startsWith("/front/user")){
+					return true;
+				}else{
+					return false;
+				}				
+			}			
 		}else{
-			response.sendRedirect(request.getContextPath()+"/video/login.action");
-			return false;
+			if(request.getSession().getAttribute("adminName") != null){
+				if(request.getServletPath().startsWith("/admin")){
+					return true;
+				}else{
+					return false;
+				}
+			}else{				
+				return false;
+			}			
 		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/*if(request.getSession().getAttribute("_front_user")!=null){
+			if(request.getSession().getAttribute("adminName")!=null){
+				return true;
+			}else{
+				if(request.getServletPath().endsWith(".do")){
+					return true;
+				}else{
+					return false;
+				}
+			}
+		}else{
+			if(request.getSession().getAttribute("adminName")!=null){
+				if(request.getServletPath().startsWith("/front/user")){
+					return false;
+				}else{
+					return true;
+				}
+			}else{
+				if(request.getServletPath().startsWith("/front/video")||request.getServletPath().startsWith("/front/course")){
+					return true;
+				}else{
+					return false;
+				}
+			}
+
+		}*/
 	}
 
 	@Override
